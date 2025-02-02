@@ -1,0 +1,109 @@
+﻿@page "/chors"
+@using MudBlazor
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>1. MudButton</h3>
+<MudButton Variant="Variant.Filled" Color="Color.Primary">Click Me</MudButton>
+
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>2. MudTextField</h3>
+
+<MudTextField Label="Enter your name" @bind-Value="name" />
+@code {
+    private string name;
+}
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>3. MudTable</h3>
+
+<MudTable Items="users">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Age</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Age">@context.Age</MudTd>
+    </RowTemplate>
+</MudTable>
+@code {
+    private List<User> users = new List<User>();
+    class User
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
+}
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>4. MudDialog</h3>
+
+@* <MudButton OnClick="ShowDialog">Open Dialog</MudButton>
+<MudDialog @ref="dialog" Title="Dialog Title">
+    <DialogContent>
+        <p>This is a dialog.</p>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="CloseDialog">Close</MudButton>
+    </DialogActions>
+</MudDialog> *@
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>5. MudCard</h3>
+
+<MudCard>
+    <MudCardContent>
+        <h3>Card Title</h3>
+        <p>This is the content of the card.</p>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton>Action 1</MudButton>
+        <MudButton>Action 2</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>6. MudNavMenu</h3>
+
+<MudNavMenu>
+    <MudNavLink Href="/">Home</MudNavLink>
+    <MudNavLink Href="/about">About</MudNavLink>
+    <MudNavLink Href="/contact">Contact</MudNavLink>
+</MudNavMenu>
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>7. MudIcon</h3>
+
+<MudIcon Icon="@Icons.Material.Filled.Home" />
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>8. MudSnackbar</h3>
+
+<MudButton OnClick="ShowSnackbar">Show Snackbar</MudButton>
+
+@code {
+    ISnackbar Snackbar;
+    private void ShowSnackbar()
+    {
+        Snackbar.Add("This is a snackbar message!");
+    }
+}
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>9. MudProgress</h3>
+
+<MudProgressCircular Color="Color.Primary" />
+<MudProgressLinear Color="Color.Secondary" />
+
+@* //////////////////////////////////////////////////////////////////////////////////// *@
+<h3>10. MudGrid</h3>
+
+<MudGrid>
+    <MudItem xs="12" sm="6" md="4">
+        <MudCard>Item 1</MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <MudCard>Item 2</MudCard>
+    </MudItem>
+</MudGrid>
