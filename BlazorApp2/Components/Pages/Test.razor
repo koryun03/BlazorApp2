@@ -1,0 +1,125 @@
+﻿@page "/test"
+@using MudBlazor
+
+
+@* 2. Пример с MudButton и MudTextField *@
+
+<MudTextField @bind-Value="userInput" Label="Введите текст" Variant="Variant.Filled" />
+<MudButton OnClick="HandleClick" Color="Color.Primary">Отправить</MudButton>
+
+<p>Вы ввели: @userInput</p>
+
+@code {
+    private string userInput;
+
+    private void HandleClick()
+    {
+        Console.WriteLine("Кнопка нажата! Введено значение: " + userInput);
+    }
+}
+
+@* 3. Пример с MudTable (таблица с данными) *@
+
+<MudTable Items="items" Hover="true" SortLabel="Sort by" Filterable="true">
+    <HeaderContent>
+        <MudTh>Имя</MudTh>
+        <MudTh>Возраст</MudTh>
+        <MudTh>Город</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Name</MudTd>
+        <MudTd>@context.Age</MudTd>
+        <MudTd>@context.City</MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private List<Person> items = new List<Person>
+    {
+        new Person { Name = "Иван", Age = 25, City = "Москва" },
+        new Person { Name = "Оля", Age = 30, City = "Санкт-Петербург" },
+        new Person { Name = "Дмитрий", Age = 28, City = "Новосибирск" }
+    };
+
+    public class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string City { get; set; }
+    }
+}
+
+@* 4. Пример с MudDialog (модальное окно) *@
+
+<MudButton OnClick="OpenDialog" Color="Color.Secondary">Открыть диалог</MudButton>
+
+<MudDialog @ref="dialog" MaxWidth="MaxWidth.Small">
+    <DialogContent>
+        <MudText>Это диалоговое окно. Вы хотите продолжить?</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="CloseDialog" Color="Color.Primary">Закрыть</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    private MudDialog dialog;
+
+    private void OpenDialog()
+    {
+        // dialog.Show();
+        dialog.ShowAsync();
+    }
+
+    private void CloseDialog()
+    {
+        //dialog.Close();
+        dialog.CloseAsync();
+    }
+}
+
+@* 5. Пример с MudDrawer (боковое меню) *@
+
+@* <MudDrawer Open="true" Anchor="Anchor.Left" Elevation="Elevation.Level2">
+    <MudDrawerHeader>Меню</MudDrawerHeader>
+    <MudDrawerContent>
+        <MudList>
+            <MudListItem>Главная</MudListItem>
+            <MudListItem>О нас</MudListItem>
+            <MudListItem>Контакты</MudListItem>
+        </MudList>
+    </MudDrawerContent>
+</MudDrawer>
+
+<MudMainContent>
+    <MudText>Это основной контент страницы</MudText>
+</MudMainContent>
+
+ *@
+@* 6. Пример с MudSnackbar (уведомления) *@
+
+<MudButton OnClick="ShowSnackbar" Color="Color.Info">Показать уведомление</MudButton>
+
+@code {
+    [Inject] private ISnackbar Snackbar { get; set; }
+
+    private void ShowSnackbar()
+    {
+        Snackbar.Add("Это информационное уведомление!", Severity.Info);
+    }
+}
+
+@* 7. Пример с MudSelect (выпадающий список) *@
+
+@* 
+<MudSelect T="string" Label="Выберите страну" @bind-Value="selectedCountry">
+    <MudSelectItem Value="Russia">Россия</MudSelectItem>
+    <MudSelectItem Value="USA">США</MudSelectItem>
+    <MudSelectItem Value="Germany">Германия</MudSelectItem>
+</MudSelect> *@
+
+<p>Вы выбрали страну: @selectedCountry</p>
+
+@code {
+    private string selectedCountry;
+}

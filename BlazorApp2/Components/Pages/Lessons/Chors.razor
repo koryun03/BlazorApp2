@@ -1,0 +1,98 @@
+﻿@page "/chors"
+@using MudBlazor
+
+<h1>chors</h1>
+
+@* Диалоговое окно (MudDialog) *@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* /////////////////////////// *@
+
+
+
+
+
+
+
+
+@* Диалог с формой (ввод данных) *@
+
+@* @inject IDialogService DialogService
+
+<MudButton OnClick="OpenFormDialog">Открыть форму</MudButton>
+
+@code {
+    private void OpenFormDialog()
+    {
+        DialogService.Show<FormDialog>("Форма");
+    }
+}
+
+<MudDialog>
+    <MudDialogTitle>Заполните данные</MudDialogTitle>
+    <MudDialogContent>
+        <MudTextField @bind-Value="name" Label="Ваше имя" />
+    </MudDialogContent>
+    <MudDialogActions>
+        <MudButton OnClick="Submit">Сохранить</MudButton>
+        <MudButton OnClick="MudDialog.Close()">Отмена</MudButton>
+    </MudDialogActions>
+</MudDialog>
+
+@code {
+    private string name;
+
+    private void Submit()
+    {
+        Console.WriteLine($"Имя: {name}");
+        MudDialog.Close(DialogResult.Ok(name));
+    }
+}
+
+
+
+ *@
+
+
+@* Всплывающая подсказка (MudTooltip) *@
+
+<MudTooltip Text="Это кнопка!">
+    <MudButton>Наведи курсор</MudButton>
+</MudTooltip>
+
+
+
+
+
+@* Контекстное меню (MudPopover) *@
+@* <MudPopover>
+    <MudButton>Нажми меня</MudButton>
+    <MudPaper Class="p-2">
+        <MudList>
+            <MudListItem>Пункт 1</MudListItem>
+            <MudListItem>Пункт 2</MudListItem>
+        </MudList>
+    </MudPaper>
+</MudPopover>
+ *@

@@ -1,0 +1,85 @@
+﻿@page "/ereq"
+@using MudBlazor
+
+<h1>ereq</h1>
+
+<br \>
+<h3> MudGrid ev MudItem </h3>
+<br \>
+
+@* MudGrid и MudItem — адаптивная сетка *@
+
+<MudGrid>
+    <MudItem xs="12" sm="6" md="4">
+        <MudPaper Class="pa-4 text-center">Колонка 1</MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <MudPaper Class="pa-4 text-center">Колонка 2</MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="12" md="4">
+        <MudPaper Class="pa-4 text-center">Колонка 3</MudPaper>
+    </MudItem>
+</MudGrid>
+
+
+
+
+<br \>
+<h3> MudTable </h3>
+<br \>
+
+ @* MudTable — таблицы с сортировкой, фильтрацией и пагинацией *@
+
+<MudTable Items="people" Dense="true" Hover="true">
+    <HeaderContent>
+        <MudTh>Имя</MudTh>
+        <MudTh>Возраст</MudTh>
+        <MudTh>Город</MudTh>
+    </HeaderContent>
+    <RowTemplate Context="person">
+        <MudTd>@person.Name</MudTd>
+        <MudTd>@person.Age</MudTd>
+        <MudTd>@person.City</MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private List<Person> people = new()
+    {
+        new Person { Name = "Алексей", Age = 30, City = "Москва" },
+        new Person { Name = "Ольга", Age = 25, City = "Санкт-Петербург" },
+        new Person { Name = "Иван", Age = 40, City = "Новосибирск" }
+    };
+
+    private class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string City { get; set; }
+    }
+}
+
+
+
+<br \>
+<h3> MudList ev MudListItem </h3>
+<br \>
+
+@* MudList и MudListItem — списки *@
+
+<MudList T="string">
+    <MudListItem T="string">📌 Элемент списка 1</MudListItem>
+    <MudListItem T="string">📌 Элемент списка 2</MudListItem>
+    <MudListItem T="string">📌 Элемент списка 3</MudListItem>
+</MudList>
+
+<MudList T="string">
+    @foreach (var item in items)
+    {
+        <MudListItem T="string">@item</MudListItem>
+    }
+</MudList>
+
+@code {
+    private List<string> items = new() { "🍎 Яблоко", "🍌 Банан", "🍒 Вишня" };
+}

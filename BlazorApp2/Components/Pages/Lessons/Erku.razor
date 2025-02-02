@@ -1,0 +1,158 @@
+﻿@page "/erku"
+@using MudBlazor
+
+<h1>erku</h1>
+
+<br \>
+<h3>MudButton</h3>
+<br \>
+
+@*MudButton — кнопки с различными стилями *@
+
+<MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="OnClick">
+    Нажми меня
+</MudButton>
+
+<MudButton Color="Color.Secondary" Variant="Variant.Outlined">
+    Второстепенная кнопка
+</MudButton>
+
+<MudButton Color="Color.Error" Variant="Variant.Text" Disabled="true">
+    Отключенная кнопка
+</MudButton>
+
+@code {
+    private void OnClick()
+    {
+        Console.WriteLine("Кнопка нажата!");
+    }
+}
+
+
+
+
+<br \>
+<h3>MudTextField</h3>
+<br \>
+
+@* MudTextField — текстовые поля с валидацией и масками *@
+
+<MudTextField Label="Введите имя" Variant="Variant.Filled" @bind-Value="userName" Required="true" RequiredError="Имя обязательно!" />
+
+<MudTextField Label="Номер телефона" Variant="Variant.Outlined" @bind-Value="phone" />
+@* <MudTextField Label="Номер телефона" Variant="Variant.Outlined" @bind-Value="phone" Mask="(000) 000-0000" /> *@
+
+<MudTextField Label="Пароль" Variant="Variant.Filled" InputType="InputType.Password" @bind-Value="password" />
+
+<p>Вы ввели: @userName</p>
+
+@code {
+    private string userName;
+    private string phone;
+    private string password;
+}
+
+
+<br \>
+<h3>MudSelect</h3>
+<br \>
+
+@* MudSelect — выпадающий список для выбора данных *@
+
+<MudSelect T="string" Label="Выберите город" @bind-Value="selectedCity">
+    <MudSelectItem Value=@("Москва")>Москва</MudSelectItem>
+    <MudSelectItem Value=@("Санкт-Петербург")>Санкт-Петербург</MudSelectItem>
+    <MudSelectItem Value=@("Новосибирск")>Новосибирск</MudSelectItem>
+</MudSelect>
+
+<p>Вы выбрали: @selectedCity</p>
+
+@code {
+    private string selectedCity;
+}
+
+
+
+
+
+
+
+
+<br \>
+<h3>MudCheckbox</h3>
+<br \>
+
+@* MudCheckbox — флажки (чекбоксы) *@
+
+<MudCheckbox bind-Checked="isChecked" Label="Согласен с условиями" />
+@* <MudCheckbox bind-Checked="isChecked" Label="Согласен с условиями" /> *@
+
+<p>Выбрано: @(isChecked ? "Да" : "Нет")</p>
+
+@code {
+    private bool isChecked;
+}
+
+
+
+
+
+
+
+
+
+<br \>
+<h3>MudRadioGroup</h3>
+<br \>
+
+@* MudRadioGroup — группы радиокнопок *@
+
+
+@* <MudRadioGroup T="string" Label="Выберите цвет" @bind-Value="selectedColor">
+    <MudRadio Option="Красный" />
+    <MudRadio Option="Синий" />
+    <MudRadio Option="Зеленый" />
+</MudRadioGroup> *@
+
+
+<MudRadioGroup T="string" Label="Выберите цвет" @bind-Value="selectedColor">
+    <MudRadio T="string" Option="Красный" />
+    <MudRadio T="string" Option="Синий" />
+    <MudRadio T="string" Option="Зеленый" />
+</MudRadioGroup>
+
+<p>Вы выбрали: @selectedColor</p>
+
+@code {
+    private string selectedColor;
+}
+
+
+
+
+
+
+
+
+
+
+
+<br \>
+<h3>MudSwitch</h3>
+<br \>
+@* MudSwitch — переключатели (аналог чекбоксов) *@
+
+@* <MudSwitch @bind-Checked="isDarkMode" Label="Темная тема" />
+
+<p>Темная тема: @(isDarkMode ? "Включена" : "Выключена")</p> *@
+
+
+<MudSwitch T="bool" bind-value="isDarkMode" Label="Темная тема" />
+
+<p>Темная тема: @(isDarkMode ? "Включена" : "Выключена")</p>
+
+@code {
+    private bool isDarkMode;
+}
+
+<br \>

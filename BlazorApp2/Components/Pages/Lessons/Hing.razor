@@ -1,0 +1,62 @@
+﻿@page "/hing"
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+
+<h1>hing</h1>
+
+@* MudForm *@
+
+<MudForm @ref="_form" Model="_user" Validation="true">
+    <MudTextField @bind-Value="_user.FirstName" Label="Имя" For="@(() => _user.FirstName)" />
+    <MudTextField @bind-Value="_user.LastName" Label="Фамилия" For="@(() => _user.LastName)" />
+    <MudTextField @bind-Value="_user.Email" Label="Email" For="@(() => _user.Email)" />
+    <MudTextField @bind-Value="_user.Password" Label="Пароль" For="@(() => _user.Password)" InputType="InputType.Password" />
+    <MudTextField @bind-Value="_user.ConfirmPassword" Label="Подтверждение пароля" For="@(() => _user.ConfirmPassword)" InputType="InputType.Password" />
+
+    <MudButton OnClick="SubmitForm" Color="Color.Primary">Зарегистрироваться</MudButton>
+</MudForm>
+
+@code {
+    private MudForm _form;
+    private User _user = new User();
+
+    private void SubmitForm()
+    {
+        _form.Validate();
+        if (_form.IsValid)
+        {
+            // Обработка данных формы
+            Console.WriteLine("Форма валидна, данные отправлены.");
+        }
+        else
+        {
+            Console.WriteLine("Форма содержит ошибки.");
+        }
+    }
+   
+    public class User
+    {
+        [Required(ErrorMessage = "Имя обязательно")]
+        [StringLength(50, ErrorMessage = "Имя не должно превышать 50 символов")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Фамилия обязательна")]
+        [StringLength(50, ErrorMessage = "Фамилия не должна превышать 50 символов")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Email обязателен")]
+        [EmailAddress(ErrorMessage = "Некорректный формат email")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Пароль обязателен")]
+        [MinLength(6, ErrorMessage = "Пароль должен содержать минимум 6 символов")]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Подтверждение пароля обязательно")]
+        [Compare(nameof(Password), ErrorMessage = "Пароли не совпадают")]
+        public string ConfirmPassword { get; set; }
+    }
+}
+
+ 
+@* MudValidator *@
